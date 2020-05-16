@@ -8,14 +8,15 @@
     "strictFunctionTypes": false,
     "lib": ["es2019", "dom"],
     "jsx": "react",
-    "module": "es6",
+    "module": "esnext",
     "moduleResolution": "node",
     "sourceMap": true,
     "target": "es6",
     "typeRoots": ["node_modules/@types"],
     "incremental": false,
     "checkJs": true,
-    "allowJs": true
+    "allowJs": true,
+    "resolveJsonModule": true
   },
   "include": ["src/**/*.ts", "src/index.tsx"],
   "exclude": ["node_modules"],
