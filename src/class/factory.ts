@@ -1,13 +1,23 @@
-export class Factory {
-  private readonly import: Promise<object>;
-  protected readonly rom: object;
+import produce from "immer";
 
-  constructor(importFn: Promise<object>) {
-    this.import = importFn;
-    this.rom = importFn;
+export class Factory {
+  private readonly _import: Promise<{ [key: string]: object }>;
+  private _isLoaded: boolean = false;
+  private _rom: { [key: string]: object } = {};
+
+  constructor(importFn: Promise<{ [key: string]: object }>) {
+    this._import = importFn;
   }
 
-  readonly readRom = async () => {
-    this.readRom;
+  protected readonly rom = async () => {
+    if (this._isLoaded) {
+      return this._rom;
+    }
+    this._rom = produce(await this._import, (_) => _);
+    return this._rom;
+  };
+
+  readonly generate = async ({ romId }: { romId: string }) => {
+    this.rom().then((hoge) => hoge[romId]);
   };
 }
