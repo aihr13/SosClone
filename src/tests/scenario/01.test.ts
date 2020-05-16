@@ -8,3 +8,7 @@ test("basic", () => {
 
   expect(store.getState().gameState.characters[1].呼び名).toBe("法子");
 });
+
+test("hoe", () => {
+  import("./hoge.js");
+});

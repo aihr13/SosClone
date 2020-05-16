@@ -1,19 +1,25 @@
-// class RamEntity<T extends object> {
-//   value: Readonly<T>;
+const a = import("./cards.json");
 
-//   constructor(value: T) {
-//     this.value = value;
-//   }
-// }
+class RamEntity<T extends object> {
+  value: Readonly<T>;
 
-// class Card extends RamEntity<{ name: string }> {
-//   constructor(value: { name: string }) {
-//     super(value);
-//   }
+  constructor(value: T) {
+    this.value = value;
+  }
 
-//   clone() {
-//     this.value.name = "re";
-//   }
-// }
+  clone(value: Partial<T>) {
+    return { ...this.value, ...value };
+  }
+}
 
-// class CardFactory {}
+class Card extends RamEntity<{ name: string }> {
+  constructor(value: { name: string }) {
+    super(value);
+  }
+
+  readonly play = () => {};
+}
+
+const a = new Card({ name: "jo" });
+
+class CardRepository {}
