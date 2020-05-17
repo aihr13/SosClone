@@ -1,5 +1,3 @@
-const a = import("./cards.json");
-
 class RamEntity<T extends object> {
   value: Readonly<T>;
 

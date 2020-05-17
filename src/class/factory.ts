@@ -1,6 +1,6 @@
 import produce from "immer";
 
-export class Factory {
+export class Factory<AnyEntity extends object> {
   private readonly _import: Promise<{ [key: string]: object }>;
   private _isLoaded: boolean = false;
   private _rom: { [key: string]: object } = {};

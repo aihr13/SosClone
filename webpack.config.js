@@ -4,47 +4,47 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 module.exports = {
-  entry: "./src/index.tsx",
+  entry: "./src/index.ts",
   module: {
     rules: [
       {
         test: /\.(tsx?|jsx?)$/,
         exclude: [/node_modules/],
-        loader: ["ts-loader"]
+        loader: ["ts-loader"],
       },
       {
         test: /\.css$/,
         use: [
           {
-            loader: MiniCssExtractPlugin.loader
+            loader: MiniCssExtractPlugin.loader,
           },
-          "css-loader"
-        ]
-      }
-    ]
+          "css-loader",
+        ],
+      },
+    ],
   },
   resolve: {
     modules: [__dirname, path.resolve(__dirname, "src"), "node_modules"],
-    extensions: [".ts", ".tsx", ".js"]
+    extensions: [".ts", ".tsx", ".js"],
   },
   output: {
     filename: "main.js",
-    path: path.resolve(__dirname, "dist")
+    path: path.resolve(__dirname, "dist"),
   },
   plugins: [
     new MiniCssExtractPlugin({
-      filename: "style.css"
+      filename: "style.css",
     }),
     new HtmlWebpackPlugin({
-      template: "./src/index.html"
-    })
+      title: "sosClone",
+    }),
   ],
   devServer: {
     host: "localhost",
     port: 8080,
     historyApiFallback: true,
     contentBase: __dirname,
-    inline: true
+    inline: true,
   },
-  devtool: "source-map"
+  devtool: "source-map",
 };
