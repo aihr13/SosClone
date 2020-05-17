@@ -1,4 +1,4 @@
-import { Factory } from "./factory";
+import { Factory } from "../class/factory";
 
 type NormalActionCard = {
   romId: string;
@@ -10,8 +10,6 @@ type AnyCard = NormalActionCard;
 
 export class CardFactory extends Factory<AnyCard> {
   constructor() {
-    super(import("../rom/cards.json"));
+    super(import(/* webpackIgnore: true */ "./json/cards/cards.json"));
   }
 }
-
-type AnyCard2 = CardFactory;
