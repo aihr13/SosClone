@@ -5,15 +5,15 @@ export type RamCharacter = {
 
 export class Repository<
   Entity extends object,
-  Key extends string,
-  T extends { [key: Key]: Entity }
+  T extends { [key: string]: Entity }
 > {
-  private _data: T = {};
+  private _data: T;
   private _loaded: boolean = false;
   private readonly _importFn: () => Promise<T>;
 
   constructor({ path }: { path: () => Promise<T> }) {
     this._importFn = path;
+    this._data = {} as any; // load が終わるまでの空データとして保持
   }
 
   readonly load: (args: {}) => Promise<void> = async () => {
@@ -25,7 +25,7 @@ export class Repository<
     this._loaded = true;
   };
 
-  readonly findById: (args: { id: Key }) => T = ({ id }) => {
+  readonly findById: (args: { id: keyof T }) => Entity = ({ id }) => {
     if (!this._loaded) {
       throw new Error();
     }
