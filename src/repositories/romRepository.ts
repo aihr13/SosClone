@@ -1,4 +1,4 @@
-export class Repository<
+export class RomRepository<
   Entity extends object,
   T extends { [key: string]: Entity }
 > {
@@ -13,10 +13,12 @@ export class Repository<
 
   readonly load: () => Promise<void> = async () => {
     if (this._loaded) {
-      return;
+      throw new Error(
+        "each Repository instances can load rom data only one time."
+      );
     }
 
-    this._data = (await this._importFn).default as any;
+    this._data = (await this._importFn) as any;
     this._loaded = true;
   };
 
